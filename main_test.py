@@ -8,7 +8,7 @@ import math
 def test_main_1():
     captureout = io.StringIO()
     sys.stdout = captureout
-    datastr = '1 3 2\n1 2 3 4 5'
+    datastr = '1 2 3\n4 5 6 7 8'
     sys.stdin = io.StringIO(datastr)
 
     main.main()
@@ -25,27 +25,35 @@ def test_main_1():
     # res = re.search(regex_string, main.evenlist)
     # assert res != none
     # print(res.group())
-    assert main.main.result == False
+    assert len(main.main.merged) == 8
+    assert main.main.merged[0] == 1
+    assert main.main.merged[2] == 3
+    assert main.main.merged[6] == 7
+    assert main.main.merged[7] == 8
 
 
 def test_main_2():
-    captureOut = io.StringIO()
-    sys.stdout = captureOut
-    datastr = '1 3 2\n4 1 3 2 5'
+    captureout = io.StringIO()
+    sys.stdout = captureout
+    datastr = '10 5 25 75 85\n55 60 45'
     sys.stdin = io.StringIO(datastr)
 
     main.main()
     sys.stdout = sys.__stdout__
-    print('Captured ', captureOut.getvalue())
-    lines = captureOut.getvalue().split('\n')
+    print('captured ', captureout.getvalue())
+    lines = captureout.getvalue().split('\n')
     print(lines)
 
-    # regex_string = r'[\w,\W]*1'
-    # regex_string += r'[\w,\W]*3'
-    # regex_string += r'[\w,\W]*5'
-    # regex_string += r'[\w,\W]*'
+    # regex_string = r'[\w,\w]*1'
+    # regex_string += r'[\w,\w]*3'
+    # regex_string += r'[\w,\w]*5'
+    # regex_string += r'[\w,\w]*'
     # print(regex_string)
     # res = re.search(regex_string, main.evenlist)
-    # assert res != None
+    # assert res != none
     # print(res.group())
-    assert main.main.result == True
+    assert len(main.main.merged) == 8
+    assert main.main.merged[0] == 55
+    assert main.main.merged[2] == 45
+    assert main.main.merged[6] == 75
+    assert main.main.merged[7] == 85
